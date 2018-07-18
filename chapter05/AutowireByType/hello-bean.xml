@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="helloSpring" class="com.pengqiang.HelloSpring"
+		init-method="initialize" destroy-method="destroy"
+		autowire ="byType">
+	</bean>
+
+	<bean id="Greeting" class="com.pengqiang.Greeting">
+		<property name="greetingMap">
+			<map>
+				<entry key="1" value="Hello!"></entry>
+				<entry key="2" value="Hi~"></entry>
+				<entry key="3" value="Nice to meet you!"></entry>
+			</map>
+		</property>
+	</bean>
+</beans>

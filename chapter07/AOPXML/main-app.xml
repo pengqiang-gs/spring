@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- 声明需要切入的方面 -->
+	<aop:config>
+		<aop:aspect id="log" ref="logging">
+			<aop:pointcut id="selectAll"
+				expression="execution(* com.pengqiang.*.*(..))"></aop:pointcut>
+			<aop:before method="beforeAdvice" pointcut-ref="selectAll" />
+			<aop:after method="afterAdvice" pointcut-ref="selectAll" />
+			<aop:after-returning
+				method="afterReturningAdvice"
+				returning="result"
+				pointcut-ref="selectAll" />
+			<aop:after-throwing 
+				method="afterThrowingAdvice"
+				throwing="ex"
+				pointcut-ref="selectAll" />
+		</aop:aspect>
+	</aop:config>
+	
+	<!-- 声明bean -->
+	<bean id="student" class="com.pengqiang.Student" p:age="21"
+		p:name="Lily"></bean>
+	<bean id="logging" class="com.pengqiang.Logging"></bean>
+</beans>
